@@ -7,6 +7,8 @@ public class MainMenuUI : MonoBehaviour {
 
     [SerializeField]
     private string gameScene;
+    [SerializeField]
+    private string menuScene;
 
 
 
@@ -19,6 +21,16 @@ public class MainMenuUI : MonoBehaviour {
     public void StartGame()
     {
         SceneManager.LoadScene(gameScene);
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(menuScene);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
 }

@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 move = transform.forward * Input.GetAxis("Vertical");
         move += transform.right * Input.GetAxis("Horizontal");
-        move.Normalize();
 
         cc.SimpleMove(move * moveSpeed * Time.deltaTime);
 
