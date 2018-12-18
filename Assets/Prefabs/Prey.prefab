@@ -604,8 +604,8 @@ MonoBehaviour:
   maxRunningTurnLength: 1
   runningRotLimit: 70
   obstacleTag: Obstacle
-  lookDist: 10
-  obstacleVoidDist: 3
+  lookDist: 3
+  obstacleAvoidDist: 1
   hunter: {fileID: 0}
 --- !u!137 &137683754915297732
 SkinnedMeshRenderer:

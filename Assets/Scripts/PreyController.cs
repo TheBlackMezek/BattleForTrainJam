@@ -27,7 +27,7 @@ public class PreyController : MonoBehaviour {
     [SerializeField]
     private float lookDist;
     [SerializeField]
-    private float obstacleVoidDist;
+    private float obstacleAvoidDist;
     
     public Transform hunter;
 
@@ -87,22 +87,32 @@ public class PreyController : MonoBehaviour {
             }
             
             runningRot += Time.deltaTime * runningTurnDir * runningTurnSpeed;
-            if (runningRot <= -runningRotLimit || runningRot >= runningRotLimit)
-                runningTurnDir *= -1;
+            if (runningRot <= -runningRotLimit)
+            {
+                runningTurnDir = 1;
+            }
+            else if(runningRot >= runningRotLimit)
+            {
+                runningTurnDir = -1;
+            }
+
+            //Debug.DrawLine(transform.position, transform.position + transform.forward * obstacleAvoidDist);
+            //RaycastHit hit;
+            //if (Physics.Raycast(transform.position, dir, out hit, obstacleAvoidDist))
+            //{
+            //    //if(hit.transform.tag == "Player")
+            //    //{
+            //    //    Debug.Log("PLAYER");
+            //    //    runningRot = 0f;
+            //    //    transform.LookAt(point);
+            //    //}
+            //    //else
+            //    //{
+            //        runningRot += 90f * runningTurnDir * (Vector3.Distance(hit.point, transform.position) / obstacleAvoidDist);
+            //    //}
+            //}
 
             transform.eulerAngles += Vector3.up * runningRot;
-
-            //Debug.DrawLine(transform.position, transform.position + dir * obstacleVoidDist);
-            //RaycastHit hit;
-            //if (Physics.Raycast(transform.position, dir, out hit, obstacleVoidDist))
-            //{
-            //    runningRot += Time.deltaTime * runningTurnDir * runningTurnSpeed;
-            //    transform.eulerAngles += Vector3.up * runningRot;
-            //}
-            //else
-            //{
-            //    runningRot = 0f;
-            //}
         }
 
         Vector3 move = transform.forward * Time.deltaTime * moveSpeed;

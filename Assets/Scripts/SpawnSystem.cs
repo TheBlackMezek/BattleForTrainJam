@@ -33,4 +33,10 @@ public class SpawnSystem : MonoBehaviour {
         }
     }
 
+    public void TeleMouse(Transform mouse)
+    {
+        mouse.position = spawns[Random.Range(0, spawns.Length)].position;
+        mouse.eulerAngles = Vector3.up * Random.Range(0f, 360f);
+    }
+
 }
