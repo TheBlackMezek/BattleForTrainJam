@@ -31,6 +31,19 @@ public class PreyController : MonoBehaviour {
     
     public Transform hunter;
 
+    [Header("Audio")]
+
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private float minPitch;
+    [SerializeField]
+    private float maxPitch;
+    [SerializeField]
+    private float minSqueakWait;
+    [SerializeField]
+    private float maxSqueakWait;
+
     private float turnTimer;
     private int turnDir;
     private bool running = false;
@@ -40,12 +53,15 @@ public class PreyController : MonoBehaviour {
     private float rot;
     private float runningRot = 0f;
 
+    private float squeakTimer;
+
 
 
     private void Start()
     {
         rot = transform.eulerAngles.x;
         runningTurnDir = Random.Range(0, 2) == 0 ? -1 : 1;
+        squeakTimer = Random.Range(minSqueakWait, maxSqueakWait);
     }
 
     private void Update()
@@ -117,6 +133,14 @@ public class PreyController : MonoBehaviour {
 
         Vector3 move = transform.forward * Time.deltaTime * moveSpeed;
         cc.SimpleMove(move);
+
+        squeakTimer -= Time.deltaTime;
+        if(squeakTimer <= 0)
+        {
+            squeakTimer = Random.Range(minSqueakWait, maxSqueakWait);
+            audioSource.pitch = Random.Range(minPitch, maxPitch);
+            audioSource.PlayOneShot(audioSource.clip);
+        }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
